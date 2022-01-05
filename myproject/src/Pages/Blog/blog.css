@@ -1,0 +1,102 @@
+.blog{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+}
+
+.blog-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 100%;
+}
+
+.blog-menu-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    background-color: aqua;
+}
+
+.blog-menu-person-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    background-color: brown;
+}
+
+.blog-menu-post-categories{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    background-color: yellowgreen;
+}
+
+.blog-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-post{   
+    display: flex;     
+    border-radius: 10px;
+    background-color: white;
+    width: 70vw;
+    height: 70vh;
+}
+
+.blog-post-image{   
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background-color: brown;
+    width: 70%;
+    height: 100%;
+}
+
+.blog-post-resume{    
+    display: flex; 
+    justify-content: center;
+    align-items: center;    
+    background-color: yellow;
+    width: 30%;
+    height: 100%;
+}
+
+.blog-options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    width: 70px;
+    height: 100%;
+}
+
+.blog-option{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightsalmon;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+}

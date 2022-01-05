@@ -1,0 +1,11 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: lightslategray; 
+    height: 10vh;   
+}
+
+button{
+    margin: 3px;
+}
