@@ -13,7 +13,7 @@ export default function Header() {
             </div>
             <div className="navLinks">
                 <Link to="/"><button>Home</button></Link>
-                <Link to="/portfolio"><button>Portfolio</button></Link>
+                <Link to="/blog"><button>Blog</button></Link>
             </div>
         </header>
     )

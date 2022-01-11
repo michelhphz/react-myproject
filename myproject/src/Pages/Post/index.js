@@ -1,3 +1,6 @@
+import { DataTable } from 'primereact/datatable'
+import { Column } from 'primereact/column'
+
 import "./post.css";
 
 export default function Post() {
@@ -5,22 +8,13 @@ export default function Post() {
     <div className="post">
       <div className="post-panel">
         <div className="post-panel-list">
-          <div className="post-panel-list-header">
-
-          </div>
           <div className="post-panel-list-body">
-            <div className="post-title">
-
-            </div>
-            <div className="post-date">
-
-            </div>
-            <div className="post-actions">
-              
-            </div>
-          </div>
-          <div className="post-panel-list-footer">
-
+            <DataTable responsiveLayout="scroll" className='table-post'>
+              <Column field="code" header="Title"></Column>
+              <Column field="name" header="Date"></Column>
+              <Column field="category" header="Category"></Column>
+              <Column field="quantity" header="Actions"></Column>
+            </DataTable>            
           </div>
         </div>
       </div>
