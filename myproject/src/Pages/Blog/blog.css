@@ -35,7 +35,7 @@
     height: 20%;
     padding: 7px;
     text-align: justify;
-    text-decoration: #DCDCDC;
+    overflow: auto;
 }
 
 .blog-menu-post-categories{
@@ -47,7 +47,7 @@
 }
 
 .category-button{
-    background-color: #3A2E39;
+    background-color: #FF8C00;
     border: none;
 }
 
@@ -68,29 +68,47 @@
     height: 70vh;
 }
 
-.blog-post-image{   
+.blog-post-text{   
     display: flex; 
-    justify-content: center;
-    align-items: center;
     width: 70%;
     height: 100%;
+    overflow: auto;
 }
 
 .blog-post-resume{    
     display: flex; 
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;    
-    background-color: #CFFFE5;
+    background-color: #FF8C00;
     width: 30%;
     height: 100%;
 }
+
+.blog-post-resume-subject{
+    overflow: auto;
+}
+
+.blog-post-resume-icons{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.blog-post-resume-icon{
+    background-color: #FF8C00;
+    border-color: #FF8C00;
+}
+
+.blog-post-resume-icon:hover{
+    background-color: #3A2E39;
+}    
 
 .blog-options{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #7E846B;
+    align-items: center;    
     width: 100px;
     height: 100%;
 }
@@ -104,9 +122,35 @@
     padding: 3px;
 }
 
+.blog-option-button{
+    background-color: #FF8C00;
+    border-color: #FF8C00;    
+}
+
 .blog-post-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    padding: 30px;
 }
+
+.blog-post-form-field{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.blog-post-button{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
+
+
+/* --- */
+
+label{
+    margin-bottom: 5px;
+}
+
