@@ -18,64 +18,109 @@ import 'primereact/resources/themes/arya-blue/theme.css'
 import imagem from '../../Media/NewTux.svg'
 import "./blog.css";
 
+import DialogPost from './dialogPost'
+import API from '../../API/api.js';
+
 export default function Blog() {
-    const [category, setCategory] = useState([]);
-    const [photo, setPhoto] = useState();
-    const [description, setDescription] = useState();
-    const [newPostDialog, setNewPostDialog] = useState(false);
-    const [postDialog, setPostDialog] = useState(false);
-    const [categoryDialog, setCategoryDialog] = useState(false);
-    const [messageDialog, setMessageDialog] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [photo, setPhoto] = useState();
+  const [description, setDescription] = useState();
+  const [newPostDialog, setNewPostDialog] = useState(false);
+  const [postDialog, setPostDialog] = useState(false);
+  const [categoryDialog, setCategoryDialog] = useState(false);
+  const [messageDialog, setMessageDialog] = useState(false);
 
-    useEffect(() => {
-        setCategory([
-          "Teste"
-        ]);
-        setDescription(
-            "Lorem ipsum dolor sit amet"
-        )
-        setPhoto(imagem)
-    }, []);
+  const [post, setPost] = useState([]);
 
-    function onClick(param){
+  useEffect(() => {
+    setCategory([
+      "All"
+    ]);
+    setDescription(
+        "Welcome to my blog!"
+    )
+    setPhoto(imagem)
 
-        if(param === 'postDialog'){
-            setPostDialog(true);
-        }
+    findPosts()
 
-        if(param === 'newPostDialog'){
-          setNewPostDialog(true);
-      }        
+  }, []);
 
-        if(param === 'categoryDialog'){
-          setCategoryDialog(true);
-        }   
+  function onClick(param){
+
+    if(param === 'postDialog'){
+        setPostDialog(true);
+    }
+
+    if(param === 'newPostDialog'){
+      setNewPostDialog(true);
+    }        
+
+    if(param === 'categoryDialog'){
+      setCategoryDialog(true);
+    }   
         
-        if(param === 'messageDialog'){
-          setMessageDialog(true);
-        }          
-
-    };
-
-    function onHide(param){
-
-        if(param === 'postDialog'){
-            setPostDialog(false);
-        }  
-
-        if(param === 'newPostDialog'){
-          setNewPostDialog(false);
-        }          
-        
-        if(param === 'categoryDialog'){
-          setCategoryDialog(false);
-        }      
-        
-        if(param === 'messageDialog'){
-          setMessageDialog(false);
-        }           
+    if(param === 'messageDialog'){
+      setMessageDialog(true);
+    }          
 
   };
+
+  function onHide(param){
+
+    if(param === 'postDialog'){
+        setPostDialog(false);
+    }  
+
+    if(param === 'newPostDialog'){
+      setNewPostDialog(false);
+    }          
+        
+    if(param === 'categoryDialog'){
+      setCategoryDialog(false);
+    }      
+        
+    if(param === 'messageDialog'){
+      setMessageDialog(false);
+    }           
+
+  };
+
+  function findPosts(){
+
+    setPost([])
+
+    API.get('/post/')
+    .then((response) => {
+      var data = response.data
+      console.log(data)
+
+      data.forEach(element => {
+        
+        if(element.publish === true){
+          setPost([ ...post, {
+            id: element.id,
+            title: element.title,
+            subject: element.subject,
+            text: element.text,
+            date: element.date,
+          }]) 
+        }       
+      });
+
+    })
+    .catch((error) => {
+      console.log(error)
+      alert("Error to find posts!")
+    })
+
+    if(post.length === 0){
+      setPost([{
+        text: "Not found posts!"
+      }])
+    }
+
+  }
+
 
   return (
     <div className="blog">
@@ -84,9 +129,7 @@ export default function Blog() {
             <img src={photo} width="100px"></img>
         </div>
         <div className="blog-menu-person-description">          
-          <Fieldset>
-            <p>{description}</p>
-          </Fieldset>          
+      
         </div>
         <div className="blog-menu-post-categories">
           {category.map((cat) => (
@@ -96,15 +139,17 @@ export default function Blog() {
           ))}
         </div>
       </div>
-      <div className="blog-body">        
-        <div className="blog-post">            
+      <div className="blog-body">
+
+        {post.map((p) => (
+          <div key={p.id} className="blog-post">            
             <Fieldset className="blog-post-text">
-              <p>teste123</p>
+              <p>{p.text}</p>
             </Fieldset>            
             <div className="blog-post-resume">
-              <h1>Title</h1>
+              <h1>{p.title}</h1>
               <h4 className="blog-post-resume-subject">
-                Image
+                {p.subject}
               </h4>
               <div className="blog-post-resume-icons">
                 <Button icon="pi pi-heart" className="blog-post-resume-icon"/>
@@ -112,7 +157,9 @@ export default function Blog() {
                 <Button icon="pi pi-share-alt" className="blog-post-resume-icon"/>
               </div>
             </div>
-        </div>        
+          </div> 
+        ))}  
+                   
       </div>
       <div className="blog-options">
         <div className="blog-option">
@@ -147,36 +194,7 @@ export default function Blog() {
             style={{ width: "50vw" }}
             onHide={() => onHide("newPostDialog")}
           >
-            <form className="blog-post-form">
-                <span className="blog-post-form-field">
-                  <label htmlFor="title">Title</label>
-                  <InputText id="title" /> 
-                </span>
-                <span className="blog-post-form-field">
-                  <label htmlFor="subject">Subject</label>
-                  <InputTextarea id="subject" rows={3} cols={30} />
-                </span>
-                <span className="blog-post-form-field">
-                  <label htmlFor="text">Text</label>
-                  <InputTextarea id="text" rows={10} cols={30} />
-                </span>
-                <span className="blog-post-form-field">
-                  <label htmlFor="date">Date</label>
-                  <Calendar id="date" monthNavigator yearNavigator yearRange="1900:2099"></Calendar>
-                </span>
-                <span className="blog-post-form-field">
-                  <label htmlFor="publish">Publish</label>
-                  <SelectButton options={[{label: 'Yes', value: 'Y'}, {label: 'No', value: 'N'}, ]}></SelectButton>
-                </span>
-                <span className="blog-post-form-field">
-                  <label htmlFor="image">Image</label>
-                  <FileUpload id="image" name="demo[]" url="./upload" mode="basic" />                                                                                 
-                </span>
-            </form>
-            <div className="blog-post-button">
-              <Button label="Done" icon="pi pi-check-circle" className="p-button-success" /> 
-              <Button label="Clear" icon="pi pi-minus-circle" className="p-button-danger" /> 
-            </div>            
+            <DialogPost/>
           </Dialog>
         </div>
         <div className="blog-option">
