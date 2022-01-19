@@ -9,8 +9,8 @@ import { Calendar } from 'primereact/calendar';
 import { SelectButton } from 'primereact/selectbutton';
 import { FileUpload } from 'primereact/fileupload';
 import { Fieldset } from 'primereact/fieldset';
-import { DataTable } from 'primereact/datatable'
-import { Column } from 'primereact/column'
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import { Tooltip } from 'primereact/tooltip';
 
 import 'primereact/resources/themes/arya-blue/theme.css'
@@ -19,6 +19,8 @@ import imagem from '../../Media/NewTux.svg'
 import "./blog.css";
 
 import DialogPost from './dialogPost'
+import DialogPostList from "./dialogPostList";
+
 import API from '../../API/api.js';
 
 export default function Blog() {
@@ -174,12 +176,7 @@ export default function Blog() {
             style={{ width: "50vw" }}
             onHide={() => onHide("postDialog")}
           >
-            <DataTable scrollable responsiveLayout="scroll">
-              <Column field="code" header="Title"></Column>
-              <Column field="name" header="Date"></Column>
-              <Column field="category" header="Category"></Column>
-              <Column field="quantity" header="Actions"/>
-            </DataTable>             
+            <DialogPostList/>
           </Dialog>                    
         </div>      
         <div className="blog-option">
